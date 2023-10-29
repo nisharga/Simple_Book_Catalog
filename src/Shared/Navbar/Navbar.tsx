@@ -3,6 +3,7 @@ import { IoIosClose } from "react-icons/io";
 import { RiMenu2Fill } from "react-icons/ri";
 import { Link, NavLink } from "react-router-dom";
 import LoadingButtonIcons from './../../assets/icons/LoadingButtonIcons';
+import CustomLinks from "../CustomLink/CustomLInk";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -20,36 +21,37 @@ const Header = () => {
               className="me-3 lg:hidden cursor-pointer  text-4xl text-primary"
             />
             <div className="mx-auto">
-              <Link to="/">
+              
+                <CustomLinks to="/">
                 <h3 className="text-2xl font-bold text-white">
                   <span className="relative">
                      SimpleBookCatalog
                     <span className="absolute top-0 left-0 w-full h-full text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 animate-gradient-x"></span>
                    </span>
                   </h3>
-              </Link>
+                  </CustomLinks>
             </div>
           </div>
           {/* second part */}
           <ul className="hidden lg:flex font-semibold space-x-10">
             <li className="hover:text-primary cursor-pointer transition-all delay-100 duration-300">
               <span>
-                <NavLink to={"/home"}>Home</NavLink>
+              <CustomLinks to="/">Home</CustomLinks>
               </span>
             </li>
             <li className="hover:text-primary cursor-pointer transition-all delay-100 duration-300">
               <span>
-                <NavLink to={"/"}>Features</NavLink>
+              <CustomLinks to="/allbooks">All Books</CustomLinks>
               </span>
             </li>
             <li className="hover:text-primary cursor-pointer transition-all delay-100 duration-300">
               <span>
-                <NavLink to={"/"}>Pricing </NavLink>
+              <CustomLinks to="/signup">Sign Up </CustomLinks>
               </span>
             </li>
             <li className="hover:text-primary cursor-pointer transition-all delay-100 duration-300">
               <span>
-                <NavLink to={"/"}>About us</NavLink>
+              <CustomLinks to="/login">About us</CustomLinks>
               </span>
             </li>
           </ul>

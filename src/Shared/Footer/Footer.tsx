@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 const Footer = () => {
     return (
-      <div className="mt-16 bg-[#07091E] pt-8">
+      <div className=" bg-[#07091E] pt-8">
         {/* Img for medium and small device. */}
         <div className="block lg:hidden mb-6 text-center">
             <Link to="/">
