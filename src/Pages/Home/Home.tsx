@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
-import { useGetBooksQuery } from "../../redux/feature/api/apiSlice";
-import SingleBook from "./SingleBook"
+import { useGetAllBooksQuery, useGetBooksQuery } from "../../redux/feature/api/apiSlice";
+import SingleBook from "./SingleBook" 
+import { useAppSelector } from "../../redux/hooks/hooks";
 
  
 const Home = () => {
-    const { data, isLoading, error } = useGetBooksQuery(null);
-    console.log(data);  
-    console.log(error);  
-    console.log(isLoading);  
+    const { data, isLoading, error } = useGetAllBooksQuery(null);
+
+    const user = useAppSelector((state) => state.user)
+    console.log("User is fffff:", user);
+ 
   return (
     <div>
         <section className="bg-gray-900 text-white">
@@ -25,9 +27,8 @@ const Home = () => {
     <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"> 
       
         {
-            data?.data.map((book, index) => <SingleBook key={index} book={book}/>)
+            data?.data.slice(0, 10).map((book, index) => <SingleBook key={index} book={book}/>)
         }        
-      
     </div>
 
     <div className="mt-12 text-center">
