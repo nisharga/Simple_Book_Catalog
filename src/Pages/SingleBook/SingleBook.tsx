@@ -6,6 +6,7 @@ import Loader from "../../Shared/Loader/Loader";
 import Swal from "sweetalert2";
 import { Rating } from '@smastrom/react-rating'
 import '@smastrom/react-rating/style.css'
+import { useState } from 'react';
 
 
 const SingleBook = () => { 
@@ -14,7 +15,7 @@ const SingleBook = () => {
   const [deleteBook, { isLoading: deleteIsloading, isError: deleteError }] = useDeleteBookMutation();
   const navigate = useNavigate();
   const [rating, setRating] = useState(0)
-
+  console.log(rating);
   
   return (
     <section className="bg-gray-900 text-white">
@@ -59,7 +60,10 @@ const SingleBook = () => {
     </div>
     
     
-    <Rating style={{ maxWidth: 250 }} value={rating} onChange={setRating} />
+    <div className="px-6 p-8">
+        <h3 className="font-bold lg:text-4xl text-2xl">Add A Review</h3>
+        <div><Rating style={{ maxWidth: 250 }} value={rating} onChange={setRating} /></div>
+    </div>
 
    </section>
   )
