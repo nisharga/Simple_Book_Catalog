@@ -7,7 +7,12 @@ import Swal from "sweetalert2";
 import { Rating } from '@smastrom/react-rating'
 import '@smastrom/react-rating/style.css'
 import { useState } from 'react';
+import { useAppSelector } from "../../redux/hooks/hooks";
+import { SubmitHandler, useForm } from "react-hook-form";
 
+interface IFormInput {
+  review: string
+}
 
 const SingleBook = () => { 
   const { id } = useParams<{ id: string }>();
@@ -15,8 +20,16 @@ const SingleBook = () => {
   const [deleteBook, { isLoading: deleteIsloading, isError: deleteError }] = useDeleteBookMutation();
   const navigate = useNavigate();
   const [rating, setRating] = useState(0)
-  console.log(rating);
+  const user = useAppSelector((state) => state.user)
   
+  
+  const { register, handleSubmit } = useForm<IFormInput>()
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    const email = user?.user.email
+    const review = data.review
+    console.log(rating, email, review); 
+  }
+
   return (
     <section className="bg-gray-900 text-white">
       {
@@ -61,8 +74,23 @@ const SingleBook = () => {
     
     
     <div className="px-6 p-8">
-        <h3 className="font-bold lg:text-4xl text-2xl">Add A Review</h3>
-        <div><Rating style={{ maxWidth: 250 }} value={rating} onChange={setRating} /></div>
+        <div className="grid grid-cols-12 gap-4">
+          <div className="lg:col-span-6 col-span-12">
+              <h3 className="font-bold lg:text-4xl text-2xl mb-4">Add A Review</h3>
+            <div>
+              <Rating style={{ maxWidth: 250 }} value={rating} onChange={setRating} />
+            </div>
+            <form onSubmit={handleSubmit(onSubmit)} className="my-5"> 
+      <textarea {...register("review", { required: true, maxLength: 20 })} 
+      className="text-blue-500 rounded py-4 w-full"/>
+      <input type="submit" />
+    </form>
+
+          </div>
+          <div className="lg:col-span-6 col-span-12">
+            cd
+          </div>
+        </div>
     </div>
 
    </section>
