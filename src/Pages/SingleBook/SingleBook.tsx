@@ -8,9 +8,8 @@ import { Rating } from '@smastrom/react-rating'
 import '@smastrom/react-rating/style.css'
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { addToComment } from "../../redux/feature/cart/cartSlice";
-
+import { SubmitHandler, useForm } from "react-hook-form"; 
+import { addToComment } from "../../redux/feature/review/reviewSlice";
 interface IFormInput {
   review: string
 }
@@ -22,7 +21,7 @@ const SingleBook = () => {
   const navigate = useNavigate();
   const [rating, setRating] = useState(0)
   const user = useAppSelector((state) => state.user)
-  const cart = useAppSelector((state) => state.cart)
+  const review = useAppSelector((state) => state.review)
   const dispatch = useAppDispatch();
   
   const { register, handleSubmit } = useForm<IFormInput>()
@@ -37,7 +36,7 @@ const SingleBook = () => {
     dispatch(addToComment(reviewData)); 
     toast.success("Review Added")
   }
-  console.log("cart", cart);
+  console.log("review", review);
   return (
     <section className="bg-gray-900 text-white">
       {
@@ -96,7 +95,8 @@ const SingleBook = () => {
 
           </div>
           <div className="lg:col-span-6 col-span-12">
-          <h1 className="text-center text-[#fff] lg:text-2xl text-xl py-5">Total ReView {cart?.products.length || 0}</h1>
+          <h1 className="text-center text-[#fff] lg:text-2xl text-xl py-5">Total ReView { 0}</h1>
+
           </div>
         </div>
     </div>
