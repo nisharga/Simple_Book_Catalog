@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import { useGetAllBooksQuery, useGetBySearchBooksQuery, useGetByYearBooksQuery } from "../../redux/feature/api/apiSlice";
 import SingleBook from "../Home/SingleBook";
@@ -11,16 +13,16 @@ const Allbooks = () => {
    
    const [searchData, setSearchData] = useState("");
 
-    const { data, isLoading, error } = useGetAllBooksQuery(null, {
+    const { data } = useGetAllBooksQuery(null, {
       refetchOnMountOrArgChange: true,
       pollingInterval: 5000    
     });
-    const { data: dataByYear, isLoading: isByYearLoading, error: isByError } = useGetByYearBooksQuery(null, {
+    const { data: dataByYear } = useGetByYearBooksQuery(null, {
       refetchOnMountOrArgChange: true,
       pollingInterval: 5000    
     });
     
-    const { data: dataBySearch, isLoading: isLoadingBySearch, error: isErrorBySearch  } = useGetBySearchBooksQuery(searchData);
+    const { data: dataBySearch  } = useGetBySearchBooksQuery(searchData);
 
   return (
     <section className="bg-gray-900 text-white">
@@ -53,13 +55,13 @@ const Allbooks = () => {
     <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"> 
       
         {
-            defaultOrder && data?.data.map((book, index) => <SingleBook key={index} book={book}/>)
+            defaultOrder && data?.data.map((book:any, index:any) => <SingleBook key={index} book={book}/>)
         } 
         {
-            filter && dataByYear?.data.map((book, index) => <SingleBook key={index} book={book}/>)
+            filter && dataByYear?.data.map((book:any, index:any) => <SingleBook key={index} book={book}/>)
         }
         {
-            search && dataBySearch?.data.map((book, index) => <SingleBook key={index} book={book}/>)
+            search && dataBySearch?.data.map((book:any, index:any) => <SingleBook key={index} book={book}/>)
         }        
     </div>
 

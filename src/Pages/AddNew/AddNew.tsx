@@ -1,20 +1,20 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
  
  
 import { FaBook } from "react-icons/fa6";
-import { useAddBookMutation } from "../../redux/feature/api/apiSlice";
-import { useForm, SubmitHandler } from "react-hook-form"
+import { useAddBookMutation } from "../../redux/feature/api/apiSlice"; 
 
 type Inputs = {
   [x: string]: any;
   example: string
   exampleRequired: string
-}
-import toast from "react-hot-toast";
+} 
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 
 const AddNew = () => {
-    const [addBook, { isLoading, isSuccess, isError } ] = useAddBookMutation()
+    const [addBook ] = useAddBookMutation()
     const [title, setTitle] = useState( );
     const [author, setAuthor] = useState( );
     const [genre, setGenre] = useState( );
@@ -30,6 +30,8 @@ const AddNew = () => {
         }
         // console.log(options);
          addBook(options);
+         addBook(options);
+         toast.success("Books added successfully")
         e.preventDefault();
      }
     

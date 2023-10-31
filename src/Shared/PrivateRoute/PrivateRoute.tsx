@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Navigate, useLocation } from "react-router-dom"
 
 import Loader from "../Loader/Loader";
 import { useAppSelector } from "../../redux/hooks/hooks";
 
-const PrivateRoute = ({children}) => {
+const PrivateRoute = ({children} : any) => {
     const user = useAppSelector((state) => state.user)
     let location = useLocation();
     
