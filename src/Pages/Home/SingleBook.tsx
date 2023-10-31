@@ -1,8 +1,12 @@
 import { FaBook } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { AiFillHeart } from "react-icons/ai";
+import { useAppDispatch } from "../../redux/hooks/hooks";
+import { addToCart } from "../../redux/feature/cart/cartSlice";
+import toast from "react-hot-toast";
 
 const SingleBook = ({book}) => {
+  const dispatch = useAppDispatch()
   return (
     <div>
     <Link
@@ -19,7 +23,11 @@ const SingleBook = ({book}) => {
             <p className="mt-1 text-sm text-gray-300">Year: {book.year}</p>
         </div>
     </Link> 
-    <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded mt-4">
+    <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded mt-4"
+    onClick={() => {
+      dispatch(addToCart(book))
+      toast.success("Book Added successfully in wishlist")
+    }}>
         <div className="flex items-center">
         <span className="mr-2">Add to wishList</span> <AiFillHeart/>
         </div>

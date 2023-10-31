@@ -17,7 +17,7 @@ const Header = () => {
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const user = useAppSelector((state) => state.user)
    
-   
+  const { products } = useAppSelector((state) => state.cart); 
   const loading = false 
 
   const handleLogOut = () => {
@@ -79,7 +79,7 @@ const Header = () => {
             </li>
             <li className="hover:text-primary cursor-pointer transition-all delay-100 duration-300">
               <span>
-              <CustomLinks to="/wishlist"><span className="text-center">Wish List <span className="flex"><AiFillHeart/> <span>+1</span></span></span></CustomLinks>
+              <CustomLinks to="/wishlist"><span className="text-center">Wish List <span className="flex"><AiFillHeart/> <span>+{products?.length | 0}</span></span></span></CustomLinks>
               </span>
             </li>
           </ul>
