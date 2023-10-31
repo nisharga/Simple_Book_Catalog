@@ -4,7 +4,8 @@ import { useDeleteBookMutation, useGetSingleBookQuery } from "../../redux/featur
 import toast from "react-hot-toast";
 import Loader from "../../Shared/Loader/Loader";
 import Swal from "sweetalert2";
-
+import { Rating } from '@smastrom/react-rating'
+import '@smastrom/react-rating/style.css'
 
 
 const SingleBook = () => { 
@@ -12,7 +13,7 @@ const SingleBook = () => {
   const { data, isLoading, error } = useGetSingleBookQuery(id);
   const [deleteBook, { isLoading: deleteIsloading, isError: deleteError }] = useDeleteBookMutation();
   const navigate = useNavigate();
-
+  const [rating, setRating] = useState(0)
 
   
   return (
@@ -58,7 +59,7 @@ const SingleBook = () => {
     </div>
     
     
-    
+    <Rating style={{ maxWidth: 250 }} value={rating} onChange={setRating} />
 
    </section>
   )
