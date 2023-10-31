@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import { SubmitHandler, useForm } from "react-hook-form"; 
 import { addToComment } from "../../redux/feature/review/reviewSlice";
+import SingleReview from "./SingleReview";
 interface IFormInput {
   review: string
 }
@@ -95,8 +96,8 @@ const SingleBook = () => {
 
           </div>
           <div className="lg:col-span-6 col-span-12">
-          <h1 className="text-center text-[#fff] lg:text-2xl text-xl py-5">Total ReView { 0}</h1>
-
+          <h1 className="text-center text-[#fff] lg:text-2xl text-xl py-5">Total ReView { review?.review?.length || 0}</h1>
+            {review?.review.map(data => <SingleReview data={data}/>) }      
           </div>
         </div>
     </div>
