@@ -35,6 +35,7 @@ const SingleBook = () => {
       quantity: 0
     } 
     dispatch(addToComment(reviewData)); 
+    toast.success("Review Added")
   }
   console.log("cart", cart);
   return (
@@ -95,7 +96,7 @@ const SingleBook = () => {
 
           </div>
           <div className="lg:col-span-6 col-span-12">
-            cd
+          <h1 className="text-center text-[#fff] lg:text-2xl text-xl py-5">Total ReView {cart?.products.length || 0}</h1>
           </div>
         </div>
     </div>
