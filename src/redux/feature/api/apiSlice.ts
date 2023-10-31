@@ -4,6 +4,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const api = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000/api/v1' }),
+    tagTypes: ['bookHandleChange'],
     endpoints: (builder) => ({ 
 
         
@@ -12,18 +13,43 @@ export const api = createApi({
               url: `/book`,
               method: 'POST',
               body: data,
-            })
+            }),
+            invalidatesTags: ['bookHandleChange'] 
           }),
 
 
           getBooks: builder.query({
-            query: () => '/book'
-        }),
+            query: () => '/book',
+            providesTags: () => ['bookHandleChange']
+          }),
+          getByYearBooks: builder.query({
+            query: () => '/book?sortBy=year',
+            providesTags: () => ['bookHandleChange']
+          }),
+          
+          getBySearchBooks: builder.query({
+            query: (id) => `/book?genre=${id}`,
+            providesTags: () => ['bookHandleChange']
+          }),
+
+
         getAllBooks: builder.query({
-            query: () => '/book/getall'
+            query: () => '/book/getall',
+            providesTags: () => ['bookHandleChange']
         }),
+        getSingleBook: builder.query({
+            query: (id) => `/book/${id}`,
+            providesTags: () => ['bookHandleChange']
+        }),
+        deleteBook: builder.mutation({
+          query: (id) => ({
+            url: `/book/${id}`,
+            method: 'DELETE',
+          }),
+        })
     })
 })
 
 
-export const {useGetBooksQuery, useGetAllBooksQuery, useAddBookMutation} = api;
+export const {useGetBooksQuery, useGetAllBooksQuery, useAddBookMutation, useGetSingleBookQuery, useDeleteBookMutation, useGetByYearBooksQuery,
+useGetBySearchBooksQuery} = api;

@@ -1,8 +1,27 @@
-import { useGetAllBooksQuery } from "../../redux/feature/api/apiSlice";
+import { useState } from "react";
+import { useGetAllBooksQuery, useGetBySearchBooksQuery, useGetByYearBooksQuery } from "../../redux/feature/api/apiSlice";
 import SingleBook from "../Home/SingleBook";
+import Filter from "./Filter";
+import Search from "./Search";
 
 const Allbooks = () => {
-    const { data, isLoading, error } = useGetAllBooksQuery(null);
+   const [defaultOrder, setdefaultOrder] = useState(true);
+   const [filter, setFilter] = useState(false);
+   const [search, setSearch] = useState(false);
+   
+   const [searchData, setSearchData] = useState("");
+
+    const { data, isLoading, error } = useGetAllBooksQuery(null, {
+      refetchOnMountOrArgChange: true,
+      pollingInterval: 5000    
+    });
+    const { data: dataByYear, isLoading: isByYearLoading, error: isByError } = useGetByYearBooksQuery(null, {
+      refetchOnMountOrArgChange: true,
+      pollingInterval: 5000    
+    });
+    
+    const { data: dataBySearch, isLoading: isLoadingBySearch, error: isErrorBySearch  } = useGetBySearchBooksQuery(searchData);
+
   return (
     <section className="bg-gray-900 text-white">
   <div
@@ -11,13 +30,37 @@ const Allbooks = () => {
     <div className="mx-auto max-w-2xl text-center">
       <h2 className="text-3xl font-bold sm:text-4xl">All Books</h2>
     </div>
+    
+    <div className="grid grid-cols-12 py-6">
+    <div className="lg:col-span-8 col-span-12">
+      <Filter 
+        setFilter={setFilter}
+        setdefaultOrder={setdefaultOrder}
+        setSearch={setSearch}
+        />
+      </div>
+      <div className="lg:col-span-4 col-span-12">
+        <Search
+          setFilter={setFilter}
+          setdefaultOrder={setdefaultOrder}
+          setSearch={setSearch}
+          setSearchData={setSearchData}
+        />
+      </div>
+    </div>
+
 
     <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"> 
       
         {
-            data?.data.map((book, index) => <SingleBook key={index} book={book}/>)
+            defaultOrder && data?.data.map((book, index) => <SingleBook key={index} book={book}/>)
+        } 
+        {
+            filter && dataByYear?.data.map((book, index) => <SingleBook key={index} book={book}/>)
+        }
+        {
+            search && dataBySearch?.data.map((book, index) => <SingleBook key={index} book={book}/>)
         }        
-      
     </div>
 
   </div>

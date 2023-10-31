@@ -56,7 +56,7 @@ const Header = () => {
             </div>
           </div>
           {/* second part */}
-          <ul className="hidden lg:flex font-semibold space-x-10">
+          <ul className="hidden lg:flex lg:items-center font-semibold space-x-10">
             <li className="hover:text-primary cursor-pointer transition-all delay-100 duration-300">
               <span>
               <CustomLinks to="/">Home</CustomLinks>
@@ -111,7 +111,7 @@ const Header = () => {
             <span className="cursor-pointer"> 
               <Link to="/">
                 <h3 className="text-2xl font-bold text-white">
-                  <span className="relative">
+                  <span className="relative bg-slate-800">
                     SimpleBookCatalog
                     <span className="absolute top-0 left-0 w-full h-full text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 animate-gradient-x"></span>
                    </span>
@@ -132,7 +132,7 @@ const Header = () => {
                 onClick={() => setSubmenuOpen(!submenuOpen)}
                 className="p-3"
               >
-                <NavLink to={"/home"}>Home</NavLink>
+                <NavLink to="/">Home</NavLink>
               </div>
               {/* submenu */}
             </li>
@@ -140,19 +140,13 @@ const Header = () => {
               style={{ borderBottom: "1px solid #F8908B" }}
               className="p-3"
             >
-              <NavLink to={"/"}>Features</NavLink>
+              <NavLink to="/allbooks">allbooks </NavLink>
             </li>
             <li
               style={{ borderBottom: "1px solid #F8908B" }}
               className="p-3"
             >
-              <NavLink to={"/"}>Pricing </NavLink>
-            </li>
-            <li
-              style={{ borderBottom: "1px solid #F8908B" }}
-              className="p-3"
-            >
-              <NavLink to={"/"}>About us</NavLink>
+              <NavLink to="/addnew">addnew</NavLink>
             </li>
             <li
               style={{ borderBottom: "1px solid #F8908B" }}
@@ -164,7 +158,7 @@ const Header = () => {
               {/* conditioning outLout and SignIn button*/}
             {user?.user.email ? 
             <button
-            onClick={ () => alert("HI") } 
+            onClick={ () => () => handleLogOut()} 
             className="transition-all delay-100 duration-300 font-semibold text-white px-8 py-2 rounded-full bg-gradient-to-r from-[#00B6BD] to-[#ACFFAD]"> { loading && <LoadingButtonIcons/>} Log Out</button> : 
             <Link to='/signin' className="transition-all delay-100 duration-300 font-semibold text-white px-8 py-2 rounded-full bg-gradient-to-r from-[#00B6BD] to-[#ACFFAD]">
               { loading && <LoadingButtonIcons/>} Signin

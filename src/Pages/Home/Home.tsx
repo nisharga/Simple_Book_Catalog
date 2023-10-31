@@ -5,7 +5,11 @@ import { useAppSelector } from "../../redux/hooks/hooks";
 
  
 const Home = () => {
-    const { data, isLoading, error } = useGetAllBooksQuery(null);
+    const { data, isLoading, error } = useGetAllBooksQuery(null, {
+      refetchOnMountOrArgChange: true,
+      pollingInterval: 30000    
+    }
+  );
 
     const user = useAppSelector((state) => state.user)
     console.log("User is fffff:", user);

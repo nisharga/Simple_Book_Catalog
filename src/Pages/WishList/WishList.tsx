@@ -21,7 +21,7 @@ const WishList = () => {
     <tr className="py-4 px-6 text-2xl text-blue-500">
       <th>Book Name | </th>
       <th>Read Now | </th>
-      <th>Remove</th>
+      <th>Remove </th>
     </tr>
   </thead>
   <tbody>

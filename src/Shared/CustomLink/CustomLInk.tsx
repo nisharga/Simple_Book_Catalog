@@ -13,7 +13,7 @@ const CustomLinks = ({ children, to, ...props }: LinkProps) => {
           padding: '5px',
           color: isActive ? 'blue' : '',
           transition: 'background-color 0.3s',
-          borderRadius: '0.35rem'
+          borderRadius: '0.35rem',
         }}
         to={to}
         {...props}
