@@ -40,8 +40,20 @@ const cartSlice = createSlice({
             }
       
           },
+
+          addToComment: (state, action: PayloadAction<any>) => {
+            const existing = state.products.find(
+              (product) => product.email === action.payload.email
+            );
+      
+            if (existing) {
+              existing.quantity = existing.quantity! + 1;
+            } else {
+              state.products.push({ ...action.payload, quantity: 1 });
+            }
+          },
     }
 })
 
-export const { addToCart, removeOne } = cartSlice.actions; 
+export const { addToCart, removeOne, addToComment } = cartSlice.actions; 
 export default cartSlice.reducer;

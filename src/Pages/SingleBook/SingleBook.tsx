@@ -7,8 +7,9 @@ import Swal from "sweetalert2";
 import { Rating } from '@smastrom/react-rating'
 import '@smastrom/react-rating/style.css'
 import { useState } from 'react';
-import { useAppSelector } from "../../redux/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { addToComment } from "../../redux/feature/cart/cartSlice";
 
 interface IFormInput {
   review: string
@@ -21,15 +22,21 @@ const SingleBook = () => {
   const navigate = useNavigate();
   const [rating, setRating] = useState(0)
   const user = useAppSelector((state) => state.user)
-  
+  const cart = useAppSelector((state) => state.cart)
+  const dispatch = useAppDispatch();
   
   const { register, handleSubmit } = useForm<IFormInput>()
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    const email = user?.user.email
-    const review = data.review
-    console.log(rating, email, review); 
+    
+    const reviewData = {
+      email: user?.user.email,
+      review : data.review,
+      rating: rating,
+      quantity: 0
+    } 
+    dispatch(addToComment(reviewData)); 
   }
-
+  console.log("cart", cart);
   return (
     <section className="bg-gray-900 text-white">
       {
@@ -83,7 +90,7 @@ const SingleBook = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="my-5"> 
       <textarea {...register("review", { required: true, maxLength: 20 })} 
       className="text-blue-500 rounded py-4 w-full"/>
-      <input type="submit" />
+      <input type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"  />
     </form>
 
           </div>
