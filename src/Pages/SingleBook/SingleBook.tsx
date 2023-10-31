@@ -17,7 +17,7 @@ interface IFormInput {
 
 const SingleBook = () => { 
   const { id } = useParams<{ id: string }>();
-  const { data, isLoading, error } = useGetSingleBookQuery(id);
+  const { data, isLoading } = useGetSingleBookQuery(id);
   const [deleteBook, { isLoading: deleteIsloading, isError: deleteError }] = useDeleteBookMutation();
   const navigate = useNavigate();
   const [rating, setRating] = useState(0)
