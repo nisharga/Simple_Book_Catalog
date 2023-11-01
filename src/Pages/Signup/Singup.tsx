@@ -1,4 +1,4 @@
-import AuthImage from "../../assets/Svg/authImage"
+import AuthImage from "../../assets/AuthImage"
 import SignupForms from "./SignupForms"
 
 const Singup = () => {

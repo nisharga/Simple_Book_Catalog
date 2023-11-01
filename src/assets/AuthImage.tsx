@@ -1,3 +1,5 @@
+
+
 const AuthImage = () => {
     return (
       <svg
@@ -802,7 +804,7 @@ const AuthImage = () => {
         />
       </svg>
     );
-  };
+};
   
-  export default AuthImage;
+export default AuthImage;
   

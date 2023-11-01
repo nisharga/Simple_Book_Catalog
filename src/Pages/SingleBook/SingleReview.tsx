@@ -1,7 +1,6 @@
-import { removeComment } from "../../redux/feature/review/reviewSlice"
-import { useAppDispatch } from "../../redux/hooks/hooks"
-
-const SingleReview = ({data}) => {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
+const SingleReview = ({data}: any) => {
   return (
     <div className="text-right">
         <h4 className="text-lg">{data?.rating} star rating</h4>

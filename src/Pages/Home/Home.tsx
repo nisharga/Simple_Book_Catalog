@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import { Link } from "react-router-dom";
-import { useGetAllBooksQuery, useGetBooksQuery } from "../../redux/feature/api/apiSlice";
+import { useGetAllBooksQuery } from "../../redux/feature/api/apiSlice";
 import SingleBook from "./SingleBook" 
 import { useAppSelector } from "../../redux/hooks/hooks";
 
  
 const Home = () => {
-    const { data, isLoading, error } = useGetAllBooksQuery(null, {
+    const { data } = useGetAllBooksQuery(null, {
       refetchOnMountOrArgChange: true,
       pollingInterval: 30000    
     }
@@ -31,7 +33,7 @@ const Home = () => {
     <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"> 
       
         {
-            data?.data.slice(0, 10).map((book, index) => <SingleBook key={index} book={book}/>)
+            data?.data.slice(0, 10).map((book : any, index : any) => <SingleBook key={index} book={book}/>)
         }        
     </div>
 

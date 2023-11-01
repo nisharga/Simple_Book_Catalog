@@ -1,18 +1,31 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-import { loginUser, setLoading } from "../../redux/feature/user/userSlice";
+import { loginUser } from "../../redux/feature/user/userSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'; 
+
+interface FormData {
+  email: string;
+  password: string;
+}
+
 
 const LoginForms = () => {
+ 
+  // const { handleSubmit } = useForm<FormData>();
+
+
   const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
     
-  } = useForm();
+  } = useForm<FormData>();
 
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user)
@@ -30,8 +43,8 @@ const LoginForms = () => {
   
 
 
-  const onSubmit = async (data) => {
-    const { email, password } = data;
+  const onSubmit = async (data: { email: any; password: any; }) => {
+    const { email, password } = data; 
    const toastId = toast.loading("Loading...");
     try {
       setLoading(true);
@@ -47,7 +60,7 @@ const LoginForms = () => {
       
     } catch (error) {
       toast.dismiss(toastId);
-      toast.error(error.message || "User not signed in");
+      toast.error( "User not signed in");
     }
   }; 
 

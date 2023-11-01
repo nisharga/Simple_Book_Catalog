@@ -16,7 +16,8 @@ function App() {
     onAuthStateChanged( auth, (user) => {
       if(user){
         dispatch(setUser(user.email))
-        dispatch(setLoading(false)) 
+        dispatch(setLoading(false))
+        console.log("We are seeing user from App.ts", user.email)
       }
     } )
   }, [auth, dispatch])

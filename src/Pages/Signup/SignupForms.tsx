@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-import { createUser, profileUpdate, setLoading } from "../../redux/feature/user/userSlice";
+import { createUser, setLoading } from "../../redux/feature/user/userSlice";
 import { useAppDispatch, useAppSelector  } from "../../redux/hooks/hooks";
 import { useEffect } from "react";
  
@@ -15,35 +18,30 @@ const SignupForms = () => {
     getValues,
   } = useForm();
 
-  /* const search = useSearchParams();
-  const from = search.get("redirectUrl") || "/";
-  const { replace, refresh } = useRouter();
-*/
 
-  // redirect code
- /*  const from = useSearchParams().get("redirectUrl") || "/"
-  const { replace } = useRouter(); */
-  // redirect code
   const dispatch = useAppDispatch();
-  const {user} = useAppSelector((state) => state.user)
+  const user = useAppSelector((state) => state.user)
 
   // navigate to homepage
   const navigate = useNavigate();
   useEffect(() => {
-    if(user?.user?.email ){
+    if(user?.user?.email){
+      setLoading(true)
       navigate("/")
+      setLoading(false)
     }
   }, [user])
-
   
   
-  const onSubmit = async (data, event) => {
-    const { email,confirmPassword, password, name } = data;
+  
+  const onSubmit = async (data: any) => {
+    const { email,password } = data;
    const toastId = toast.loading("Loading...");
     try { 
         setLoading(true);
         dispatch( createUser({email: email, password: password}));
-        dispatch( profileUpdate({name: name}));
+       
+        
         setTimeout(() => {
             setLoading(false);
         }, 3000);
@@ -52,13 +50,10 @@ const SignupForms = () => {
     //   replace(from)
     } catch (error) {
       toast.dismiss(toastId);
-      toast.error(error.message || "User not signed in");
+      toast.error("User not signed in");
     }
   }; 
    
-  /* const {user} = useAppSelector((state) => state.user)
-  console.log("user from signup", user);   */
-
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-4 px-8">
@@ -140,7 +135,7 @@ const SignupForms = () => {
         />
         {errors.confirmPassword && (
           <span className="text-red-500 text-base mt-1">
-            {errors.confirmPassword.message || "Please confirm your password."}
+            {"Please confirm your password."}
           </span>
         )}
       </div>

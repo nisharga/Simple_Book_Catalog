@@ -1,4 +1,5 @@
-import AuthImage from "../../assets/Svg/authImage"
+
+import AuthImage from "../../assets/AuthImage"
 import LoginForms from "./LoginForms"
 
 const Login = () => {

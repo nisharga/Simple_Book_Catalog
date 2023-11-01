@@ -4,7 +4,7 @@ import { RiMenu2Fill } from "react-icons/ri";
 import { Link, NavLink } from "react-router-dom";
 import LoadingButtonIcons from './../../assets/icons/LoadingButtonIcons';
 import CustomLinks from "../CustomLink/CustomLInk";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
+import { useAppSelector } from "../../redux/hooks/hooks";
  
 import { signOut } from "firebase/auth"; 
 import { auth } from "../../redux/feature/user/userSlice";
@@ -29,8 +29,10 @@ const Header = () => {
   }
  
   // email name show as dispaly name
-  const beforeAtSymbol = user?.user.email;
-  const displayName = beforeAtSymbol?.substring(0, beforeAtSymbol.indexOf('@'));
+  //beforeAtSymbol?.substring(0, beforeAtSymbol.indexOf('@'));
+   
+  const tempEmail = user?.user.email;
+  const displayName = tempEmail?.substring(0, tempEmail.indexOf('@'));
    
 
   return (

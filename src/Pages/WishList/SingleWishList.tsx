@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link } from "react-router-dom";
 import { BsFillTrashFill } from "react-icons/bs";
  
@@ -6,7 +7,7 @@ import { removeOne } from "../../redux/feature/cart/cartSlice";
 import toast from "react-hot-toast";
 
 
-const SingleWishList = ({book}) => {
+const SingleWishList = ({book}: any) => {
     const dispatch = useAppDispatch();
     return ( 
       

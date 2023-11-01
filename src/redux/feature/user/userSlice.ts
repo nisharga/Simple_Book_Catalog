@@ -1,4 +1,5 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut } from "firebase/auth";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import app from "../../../firebase/firebase";
 
@@ -6,6 +7,7 @@ export const auth = getAuth(app)
 
 interface IUserState {
     user: {
+      user: any;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       email: string | null;
     };
@@ -22,6 +24,7 @@ interface IUserState {
 const initialState: IUserState = {
     user: {
         email: null,
+        user: undefined
     },
     isLoading: false,
     isError: false,
@@ -36,14 +39,6 @@ export const createUser = createAsyncThunk(
   }
 )
 
-export const profileUpdate = createAsyncThunk(
-    'user/profileUpdate',
-    async (name: string) => { 
-        return updateProfile(auth.currentUser, {
-            displayName: name  
-        }); 
-    }
-) 
 
 export const logOut = createAsyncThunk(
     'user/logOut',

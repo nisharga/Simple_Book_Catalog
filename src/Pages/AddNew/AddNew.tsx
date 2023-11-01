@@ -1,35 +1,31 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
  
  
 import { FaBook } from "react-icons/fa6";
 import { useAddBookMutation } from "../../redux/feature/api/apiSlice"; 
 
-type Inputs = {
-  [x: string]: any;
-  example: string
-  exampleRequired: string
-} 
 import { useState } from "react";
 import toast from "react-hot-toast";
 
 
 const AddNew = () => {
     const [addBook ] = useAddBookMutation()
-    const [title, setTitle] = useState( );
-    const [author, setAuthor] = useState( );
-    const [genre, setGenre] = useState( );
-    const [year, setYear] = useState();
-    //set string to varibale
-    
-     const handleSubmit = (e) => {
+    const [title, setTitle] = useState<string | undefined>(undefined); 
+    const [author, setAuthor] = useState<string | undefined>(undefined);
+    const [genre, setGenre] = useState<string | undefined>(undefined);
+    const [year, setYear] = useState<string | undefined>(undefined);
+    //typescript
+ 
+
+     const handleSubmit = (e: { preventDefault: () => void; }) => {
         const options ={
             "title": title,
             "author": author,
             "genre":  genre ,
-            "year": parseInt(year) 
+            "year": year !== undefined ? parseInt(year) : undefined 
         }
         // console.log(options);
-         addBook(options);
          addBook(options);
          toast.success("Books added successfully")
         e.preventDefault();
@@ -65,7 +61,7 @@ const AddNew = () => {
                     <label className="label">
                         <span className="label-text">Genre</span> 
                     </label> 
-                    <input type="text" placeholder="Book author"  className="input input-bordered w-full p-2 rounded my-2 text-blue-500" onChange={(e) => setGenre(e.target.value)}/>
+                    <input type="text" placeholder="Genre"  className="input input-bordered w-full p-2 rounded my-2 text-blue-500" onChange={(e) => setGenre(e.target.value)}/>
                 </div>
             </div> 
              <div className="col-span-12">

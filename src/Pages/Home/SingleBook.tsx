@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FaBook } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { AiFillHeart } from "react-icons/ai";
@@ -5,7 +6,7 @@ import { useAppDispatch } from "../../redux/hooks/hooks";
 import { addToCart } from "../../redux/feature/cart/cartSlice";
 import toast from "react-hot-toast";
 
-const SingleBook = ({book}) => {
+const SingleBook = ({book}: any) => {
   const dispatch = useAppDispatch()
   return (
     <div>

@@ -1,13 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 import toast from "react-hot-toast"
-
 const Filter = ({setFilter, setdefaultOrder, setSearch} : any) => {
     const handleSubmit = (e : any) => {
         if(e.target.radio.value === "year"){
             setdefaultOrder(false)
             setFilter(true)
-            setSearch=(false)
+            setSearch(false)
             toast.success("Showing Filtered Data")
 
         }else if(e.target.radio.value === "allBooks"){
